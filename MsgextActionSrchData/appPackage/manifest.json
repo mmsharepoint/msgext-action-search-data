@@ -1,0 +1,103 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.16",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://www.example.com",
+        "privacyUrl": "https://www.example.com/termofuse",
+        "termsOfUseUrl": "https://www.example.com/privacy"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "MsgextActionSrchData${{APP_NAME_SUFFIX}}",
+        "full": "full name for MsgextActionSrchData"
+    },
+    "description": {
+        "short": "Short description of MsgextActionSrchData",
+        "full": "Full description of MsgextActionSrchData"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [],
+    "composeExtensions": [
+        {
+            "botId": "${{BOT_ID}}",
+          "commands": [
+            {
+              "id": "selectItem",
+              "context": [
+                "compose",
+                "message",
+                "commandBox"
+              ],
+              "description": "Command to run action select item from a list",
+              "title": "Select Item",
+              "type": "action",
+              "parameters": [
+                {
+                  "name": "title",
+                  "title": "Card title",
+                  "description": "Title for the card",
+                  "inputType": "text"
+                },
+                {
+                  "name": "subTitle",
+                  "title": "Subtitle",
+                  "description": "Subtitle for the card",
+                  "inputType": "text"
+                },
+                {
+                  "name": "text",
+                  "title": "Text",
+                  "description": "Text for the card",
+                  "inputType": "textarea"
+                }
+              ]
+            },
+            {
+              "id": "createCard",
+              "context": [
+                "compose",
+                "message",
+                "commandBox"
+              ],
+              "description": "Command to run action to create a Card from Compose Box",
+              "title": "Create Card",
+              "type": "action",
+              "parameters": [
+                {
+                  "name": "title",
+                  "title": "Card title",
+                  "description": "Title for the card",
+                  "inputType": "text"
+                },
+                {
+                  "name": "subTitle",
+                  "title": "Subtitle",
+                  "description": "Subtitle for the card",
+                  "inputType": "text"
+                },
+                {
+                  "name": "text",
+                  "title": "Text",
+                  "description": "Text for the card",
+                  "inputType": "textarea"
+                }
+              ]
+            }
+          ]
+        }
+    ],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}

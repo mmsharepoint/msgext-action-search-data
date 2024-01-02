@@ -1,0 +1,21 @@
+﻿@page "/InitialAction"
+<h3>Select</h3>
+
+<FluentListbox Items=@stringOptions />
+
+@code {
+    string? listboxValue;
+
+    List<Option<string>> stringOptions = new()
+        {
+          
+            { new Option<string> { Text = "1", Value = "One" } },
+            { new Option<string> { Text = "2", Value = "Two", Selected = true } },
+            { new Option<string> { Text = "3", Value = "Three" } },
+            { new Option<string> { Text = "4", Value = "Four" } },
+            { new Option<string> { Text = "5", Value = "Five" } },
+            { new Option<string> { Text = "6", Value = "Six" }}
+
+        };
+
+}
