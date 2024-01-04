@@ -3,10 +3,12 @@ using MsgextActionSrchData.Action;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true); 
+builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
+builder.Services.AddFluentUIComponents();
 
 builder.Services.AddControllers();
 builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
@@ -39,7 +41,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
-{
+{    
     endpoints.MapControllers();
     endpoints.MapFallbackToPage("/_Host");
     endpoints.MapBlazorHub();
