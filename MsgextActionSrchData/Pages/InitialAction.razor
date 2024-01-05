@@ -1,40 +1,36 @@
-﻿
+﻿@using MsgextActionSrchData.Model;
+@using MsgextActionSrchData.Controllers;
+
+@inject ProductController ProductsService
+
 @page "/InitialAction"
-<h3>Select</h3>
 <div>
-  <p>Text goes here</p>
-  <FluentTextField Label="Label" Placeholder="Insert values here"></FluentTextField>
+  <FluentListbox TOption="Product"
+                  Label="Select a product"
+                  Items=@products
+                  Id="products-listbox"
+                  Height="200px"
+                  Width="70%"
+                  OptionValue="@(i => i.Id)"
+                  OptionText="@(i => i.Id + " " + i.Name)"
+                  @bind-Value="@SelectedValue"
+                  @bind-SelectedOption="@SelectedItem" />
 
-    <FluentListbox 
-                   Label="Select a product"
-                   Items=@stringOptions
-                   Id="people-listbox"
-                   Height="150px"
-                   OptionValue="@(i => i.Value)"
-                   OptionText="@(i => i.Text)"
-                   OptionSelected="@(i => i.Selected)"
-                   @bind-Value="@stringValue" />
-
-    <p>
-        Selected Value: @stringValue<br />
-    </p>
+  <p>
+      Selected value: @SelectedValue. <br />
+      Selected item: @SelectedItem?.ToString()
+  </p>
 
 </div>
 
 @code {
+    Product? SelectedItem;
+    string? SelectedValue;
 
-    List<Option<string>> stringOptions = new()
+    public List<Product> products;
+    protected override Task OnInitializedAsync()
     {
-        { new Option<string> { Value = "1", Text = "Product 1" } },
-        { new Option<string> { Value = "2", Text = "Product 2", Selected = true } },
-        { new Option<string> { Value = "3", Text = "Product 3" } },
-        { new Option<string> { Value = "4", Text = "Product 4" } },
-        { new Option<string> { Value = "5", Text = "Product 5" } },
-        { new Option<string> { Value = "6", Text = "Product 6" } },
-        { new Option<string> { Value = "7", Text = "Product 7" } },
-        { new Option<string> { Value = "8", Text = "Product 8" } }
-
-
-    };
-    string? stringValue;
+        products = ProductsService.GetAllProducts();
+        return base.OnInitializedAsync();
+    }
 }
