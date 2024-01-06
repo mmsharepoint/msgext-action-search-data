@@ -1,10 +1,10 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.16",
-  "version": "1.0.0",
-  "id": "${{TEAMS_APP_ID}}",
-  "packageName": "com.microsoft.teams.extension",
-  "developer": {
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.16",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
         "name": "Teams App, Inc.",
         "websiteUrl": "https://www.example.com",
         "privacyUrl": "https://www.example.com/termofuse",
@@ -24,25 +24,25 @@
     },
     "accentColor": "#FFFFFF",
     "bots": [],
-  "composeExtensions": [
-    {
-      "botId": "${{BOT_ID}}",
-      "commands": [
-        {
-          "id": "selectItem",
-          "context": [
-            "compose",
-            "message",
-            "commandBox"
-          ],
-          "description": "Command to select item from a list",
-          "title": "Select Item",
-          "type": "action",
-          "taskInfo": {
-            "title": "Select item",
-            "url": "${{BOT_ENDPOINT}}/initialaction"
-          }
-        },
+    "composeExtensions": [
+      {
+        "botId": "${{BOT_ID}}",
+        "commands": [
+          {
+            "id": "selectItem",
+            "context": [
+              "compose",
+              "message",
+              "commandBox"
+            ],
+            "description": "Command to select item from a list",
+            "title": "Select Item",
+            "type": "action",
+            "taskInfo": {
+              "title": "Select item",
+              "url": "${{BOT_ENDPOINT}}/initialaction"
+            }
+          },
             {
               "id": "createCard",
               "context": [
@@ -83,7 +83,5 @@
         "identity",
         "messageTeamMembers"
     ],
-  "validDomains": [
-    "${{BOT_DOMAIN}}"
-  ]
+    "validDomains": []
 }

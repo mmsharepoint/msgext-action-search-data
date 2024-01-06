@@ -32,6 +32,40 @@ namespace MsgextActionSrchData.Controllers
             }
             return products;
         }
+        public List<Product> GetOrderableProducts()
+        {
+            List<Product> products = new List<Product>();
+            Pageable<TableEntity> list = tableClient.Query<TableEntity>(filter: $"Orderable eq true");
+            foreach (TableEntity item in list)
+            {
+                Product p = new Product()
+                {
+                    Id = item.PartitionKey,
+                    Name = item.RowKey,
+                    Orders = (int)item.GetInt32("Orders"),
+                    Orderable = (bool)item.GetBoolean("Orderable")
+                };
+                products.Add(p);
+            }
+            return products;
+        }
+        public List<Product> GetNonOrderableProducts()
+        {
+            List<Product> products = new List<Product>();
+            Pageable<TableEntity> list = tableClient.Query<TableEntity>(filter: $"Orderable eq false");
+            foreach (TableEntity item in list)
+            {
+                Product p = new Product()
+                {
+                    Id = item.PartitionKey,
+                    Name = item.RowKey,
+                    Orders = (int)item.GetInt32("Orders"),
+                    Orderable = (bool)item.GetBoolean("Orderable")
+                };
+                products.Add(p);
+            }
+            return products;
+        }
         public List<Product> GetAllMockProducts()
         {
             return new List<Product>() {

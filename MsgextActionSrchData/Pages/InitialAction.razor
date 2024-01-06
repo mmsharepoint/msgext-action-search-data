@@ -1,5 +1,6 @@
 ﻿@using MsgextActionSrchData.Model;
 @using MsgextActionSrchData.Controllers;
+@using Microsoft.AspNetCore.Components;
 
 @inject ProductController ProductsService
 
@@ -15,22 +16,44 @@
                   OptionText="@(i => i.Id + " " + i.Name)"
                   @bind-Value="@SelectedValue"
                   @bind-SelectedOption="@SelectedItem" />
-
-  <p>
-      Selected value: @SelectedValue. <br />
-      Selected item: @SelectedItem?.ToString()
-  </p>
-
+    
+    <FluentRadioGroup Required="true" @bind-Value="dataSrc" Name="DataSrc" Orientation="Orientation.Horizontal">
+        <FluentRadio Value="@("all")">All</FluentRadio>
+        <FluentRadio Value="@("orderable")">Orderable</FluentRadio>
+        <FluentRadio Value="@("nonorderable")">Non orderable</FluentRadio>
+    </FluentRadioGroup>
+    <p>
+        Selected Data Source: @dataSrc <br />
+    </p>
 </div>
 
 @code {
     Product? SelectedItem;
     string? SelectedValue;
+    string dataSrc;
+    bool firstRender = true;
 
     public List<Product> products;
+
     protected override Task OnInitializedAsync()
     {
         products = ProductsService.GetAllProducts();
         return base.OnInitializedAsync();
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    public async Task ReloadData(EventArgs e)
+    {
+        switch (e.ToString())
+        {
+            default:
+                products = ProductsService.GetOrderableProducts();
+                break;
+        }
+
+        await Task.CompletedTask;
     }
 }
