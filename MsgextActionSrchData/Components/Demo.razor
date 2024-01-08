@@ -1,0 +1,24 @@
+﻿<h3>Demo</h3>
+
+<p>
+    <label>
+        Normal Blazor binding:
+        <input @bind-value="InputValue" />
+    </label>
+</p>
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<p>
+    <code>InputValue</code>: @InputValue
+</p>
+
+@code {
+    private int currentCount = 0;
+    private string? InputValue { get; set; }
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

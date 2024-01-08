@@ -36,6 +36,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    builder.Configuration["BotEndpoint"] = Environment.GetEnvironmentVariable("VS_TUNNEL_URL");
 }
 app.UseStaticFiles();
 

@@ -5,33 +5,57 @@
 @inject ProductController ProductsService
 
 @page "/InitialAction"
-<div>
-  <FluentListbox TOption="Product"
-                  Label="Select a product"
-                  Items=@products
-                  Id="products-listbox"
-                  Height="200px"
-                  Width="70%"
-                  OptionValue="@(i => i.Id)"
-                  OptionText="@(i => i.Id + " " + i.Name)"
-                  @bind-Value="@SelectedValue"
-                  @bind-SelectedOption="@SelectedItem" />
-    
-    <FluentRadioGroup Required="true" @bind-Value="dataSrc" Name="DataSrc" Orientation="Orientation.Horizontal">
-        <FluentRadio Value="@("all")">All</FluentRadio>
-        <FluentRadio Value="@("orderable")">Orderable</FluentRadio>
-        <FluentRadio Value="@("nonorderable")">Non orderable</FluentRadio>
-    </FluentRadioGroup>
-    <p>
-        Selected Data Source: @dataSrc <br />
-    </p>
+<div class="container">
+  <div class="row">
+    <div class="px-4 col-10">
+      <FluentListbox TOption="Product"
+                    Label="Select a product"
+                    Items=@products
+                    Id="products-listbox"
+                    Height="200px"
+                    Width="70%"
+                    OptionValue="@(i => i.Id)"
+                    OptionText="@(i => i.Id + " " + i.Name)"
+                    @bind-Value="@SelectedValue"
+                    @bind-SelectedOption="@SelectedItem" />
+    </div>
+    <div class="px-4 col-2">
+      <FluentRadioGroup Required="true" @bind-Value="DataSrc" Name="DataSrc" Orientation="Orientation.Horizontal">
+          <FluentRadio Value="@("all")">All</FluentRadio>
+          <FluentRadio Value="@("orderable")">Orderable</FluentRadio>
+          <FluentRadio Value="@("nonorderable")">Non orderable</FluentRadio>
+      </FluentRadioGroup>
+
+      <p>
+          Selected Data Source: @DataSrc <br />
+          Alt Data Source: @DataSrc <br />
+      </p>
+    </div>
+  </div>
 </div>
 
 @code {
     Product? SelectedItem;
     string? SelectedValue;
-    string dataSrc;
-    bool firstRender = true;
+    string dataSource;
+
+    [Parameter]public string DataSrc { get => dataSource; set
+        {
+            dataSource = value;
+            switch (dataSource)
+            {
+                case "nonorderable":
+                    products = ProductsService.GetNonOrderableProducts();
+                    break;
+                case "orderable":
+                    products = ProductsService.GetOrderableProducts();
+                    break;
+                default:
+                    products = ProductsService.GetAllProducts();
+                    break;
+            }
+        }
+    }
 
     public List<Product> products;
 
@@ -41,10 +65,6 @@
         return base.OnInitializedAsync();
     }
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
-    {
-        return base.OnAfterRenderAsync(firstRender);
-    }
     public async Task ReloadData(EventArgs e)
     {
         switch (e.ToString())
