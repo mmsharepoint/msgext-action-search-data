@@ -1,4 +1,4 @@
-# msgext action search data - Microsoft 365 App
+﻿# msgext action search data - Microsoft 365 App
 Teams/M365 messaging extension app handling (action-based) data retrieval and handling
 
 ## Summary
@@ -45,10 +45,16 @@ Version|Date|Author|Comments
 - Now you should have prepared your app (will try local first)
 - In your Teams calendar have a "real" meeting prepared ("real" means with at least +1 real partcipant)
 - When starting debug by F5 or "Microsoft Teams (browser)"
-  - �dd the app to that meeting (eventually search for it)
+  - Âdd the app to that meeting (eventually search for it)
   - Join the meeting to start it
   - Leave and end the meeting
 
 
 
 ## Features
+
+* [Build Action-Based M365 Messaging Extensions for Teams, Outlook and Copilot](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/extend-m365-teams-message-extension?tabs=ttk%2Caction-based-message-extension&WT.mc_id=M365-MVP-5004617)
+* [Build Task Modules for Bots and Messaging Extensions](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-task-modules?WT.mc_id=M365-MVP-5004617)
+* [Use Blazor in .Net6 Web App](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-6.0&WT.mc_id=M365-MVP-5004617)
+* Data Storage and retrieval in [Azure Tables](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/data.tables-readme?view=azure-dotnet&WT.mc_id=M365-MVP-5004617)
+ 
