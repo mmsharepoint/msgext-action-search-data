@@ -30,6 +30,8 @@
           Selected Data Source: @DataSrc <br />
           Alt Data Source: @DataSrc <br />
       </p>
+            @* <FluentButton Appearance="Appearance.Accent" onclick="SbmData.submitTask()">Submit Task</FluentButton> *@
+      <button onclick="SbmData.submitTask()">Submit Task</button>
     </div>
   </div>
 </div>
@@ -64,16 +66,5 @@
         products = ProductsService.GetAllProducts();
         return base.OnInitializedAsync();
     }
-
-    public async Task ReloadData(EventArgs e)
-    {
-        switch (e.ToString())
-        {
-            default:
-                products = ProductsService.GetOrderableProducts();
-                break;
-        }
-
-        await Task.CompletedTask;
-    }
+    
 }
