@@ -3,8 +3,15 @@
 @using Microsoft.AspNetCore.Components;
 
 @inject ProductController ProductsService
+@inject IJSRuntime js
 
 @page "/InitialAction"
+<script type="text/javascript">
+    function submitTasks() {
+        var selectedName = document.getElementById('prodID').getAttribute('data-id');
+        alert(selectedName);
+    }
+</script>
 <div class="container">
   <div class="row">
     <div class="px-4 col-10">
@@ -12,12 +19,18 @@
                     Label="Select a product"
                     Items=@products
                     Id="products-listbox"
-                    Height="200px"
+                    Height="250px"
                     Width="98%"
                     OptionValue="@(i => i.Id)"
                     OptionText="@(i => i.Id + " " + i.Name)"
                     @bind-Value="@SelectedValue"
                     @bind-SelectedOption="@SelectedItem" />
+
+            <p>
+                Selected value: @SelectedValue <br />
+                Selected item: @SelectedItem?.ToString()
+            </p>
+
     </div>
     <div class="px-4 col-2">
       <FluentRadioGroup Required="true" @bind-Value="DataSrc" Name="DataSrc" Orientation="Orientation.Horizontal">
@@ -27,19 +40,38 @@
       </FluentRadioGroup>
 
       <p>
-          Selected Data Source: @DataSrc <br />
-          Alt Data Source: @DataSrc <br />
+          <label id="prodID" data-id="@prodID">"@prodID</label>
+          <label data-Name="@prodName">@prodName</label>
+          <label data-orders="@prodOrders">@prodOrders</label>
+          <label data-orderable= ="@prodOrderable">@prodOrderable</label>
       </p>
             @* <FluentButton Appearance="Appearance.Accent" onclick="SbmData.submitTask()">Submit Task</FluentButton> *@
-      <button onclick="SbmData.submitTask()">Submit Task</button>
+            <button onclick="submitTasks()">Submit Order</button>
+            @* <button onclick="SbmData.submitTask("if","Name",12,false)">Submit Order</button> *@
     </div>
   </div>
 </div>
 
 @code {
-    Product? SelectedItem;
+    [Parameter] public Product? SelectedItem
+    { get => _selectedProduct;
+        set {
+            prodID = value.Id;
+            prodName = value.Name;
+            prodOrders = value.Orders;
+            prodOrderable = value.Orderable;
+        }
+    }
+
+    private Product _selectedProduct;
+    private string _selectedItem;
     string? SelectedValue;
     string dataSource;
+
+    string prodID;
+    string prodName;
+    Int32 prodOrders = 17;
+    bool prodOrderable = true;
 
     [Parameter]public string DataSrc { get => dataSource; set
         {
@@ -66,5 +98,15 @@
         products = ProductsService.GetAllProducts();
         return base.OnInitializedAsync();
     }
-    
+    // protected async Task SubmitTask()
+    // {
+    //     Product datObj = new Product {
+    //       Id = "if",
+    //       Name = "Name",
+    //       Orders = 12,
+    //       Orderable = false 
+    //     };
+    //     await js.InvokeVoidAsync("SbmData.submitTask()", datObj);
+    // }
+
 }

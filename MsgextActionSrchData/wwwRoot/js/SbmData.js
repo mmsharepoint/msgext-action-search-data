@@ -6,18 +6,14 @@
       microsoftTeams.initialize();
     }
     console.log("Script loades");
+    
   }
-  SbmData.submitTask = function () {
+  
+  SbmData.submitTask = function (Id, Name, Orders, Orderable) {
     if (microsoftTeams) {
-      microsoftTeams.dialog.submit(
-        {
-          Id: "1",
-          Name: "Produc1",
-          Orderable: true,
-          Orders: 18
-        }
-      )
-    };
+      microsoftTeams.initialize();
+      microsoftTeams.tasks.submitTask({ id: Id, name: Name, orders: Orders, oderable: Orderable });
+    }
   }
   
 }(window.SbmData = window.SbmData || {}));
