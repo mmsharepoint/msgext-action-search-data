@@ -3,13 +3,17 @@
 @using Microsoft.AspNetCore.Components;
 
 @inject ProductController ProductsService
-@inject IJSRuntime js
 
 @page "/InitialAction"
 <script type="text/javascript">
     function submitTasks() {
-        var selectedName = document.getElementById('prodID').getAttribute('data-id');
-        alert(selectedName);
+        var selectedId = document.getElementById('prodName').getAttribute('data-prodid');
+        var selectedName = document.getElementById('prodName').getAttribute('data-name');
+        var selectedOrders = document.getElementById('prodName').getAttribute('data-orders');
+        var selectedOrderable = document.getElementById('prodName').getAttribute('data-orderable');
+        var result = { Id: selectedId, Name: selectedName, Orders: selectedOrders, Orderable: selectedOrderable }
+        alert(result.Id + " " + result.Name + " " + result.Orders + " " + result.Orderable);
+        microsoftTeams.tasks.submitTask(result);
     }
 </script>
 <div class="container">
@@ -28,7 +32,7 @@
 
             <p>
                 Selected value: @SelectedValue <br />
-                Selected item: @SelectedItem?.ToString()
+                Selected item: @SelectedItem?.Name.ToString()
             </p>
 
     </div>
@@ -40,36 +44,28 @@
       </FluentRadioGroup>
 
       <p>
-          <label id="prodID" data-id="@prodID">"@prodID</label>
-          <label data-Name="@prodName">@prodName</label>
-          <label data-orders="@prodOrders">@prodOrders</label>
-          <label data-orderable= ="@prodOrderable">@prodOrderable</label>
+          <label id="prodName" data-name="@SelectedItem?.Name" data-prodid="@SelectedItem?.Id" data-orders="@SelectedItem?.Orders" data-orderable="@SelectedItem.Orderable">@SelectedItem?.Name</label>
       </p>
-            @* <FluentButton Appearance="Appearance.Accent" onclick="SbmData.submitTask()">Submit Task</FluentButton> *@
-            <button onclick="submitTasks()">Submit Order</button>
-            @* <button onclick="SbmData.submitTask("if","Name",12,false)">Submit Order</button> *@
+          @* <FluentButton Appearance="Appearance.Accent" onclick="SbmData.submitTask()">Submit Task</FluentButton> *@
+          <button onclick="submitTasks()">Submit Order</button>
     </div>
   </div>
 </div>
 
 @code {
-    [Parameter] public Product? SelectedItem
-    { get => _selectedProduct;
-        set {
-            prodID = value.Id;
-            prodName = value.Name;
-            prodOrders = value.Orders;
-            prodOrderable = value.Orderable;
-        }
-    }
-
-    private Product _selectedProduct;
-    private string _selectedItem;
-    string? SelectedValue;
+    Product? SelectedItem = new Product
+    {
+        Id = "",
+        Name = "",
+        Orders=  0,
+        Orderable= true
+    };
+    
+    string? SelectedValue = string.Empty;
     string dataSource;
 
-    string prodID;
-    string prodName;
+    string prodID = " ";
+    string prodName = " ";
     Int32 prodOrders = 17;
     bool prodOrderable = true;
 

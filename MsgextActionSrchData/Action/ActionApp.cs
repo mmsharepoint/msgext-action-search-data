@@ -6,6 +6,8 @@ using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using Microsoft.Bot.Connector;
 using static System.Net.WebRequestMethods;
+using MsgextActionSrchData.Model;
+using System.Net.Mail;
 
 namespace MsgextActionSrchData.Action;
 
@@ -15,30 +17,24 @@ public class ActionApp : TeamsActivityHandler
     // Action.
     protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
     {
-        //if (action.CommandId == "selectItem")
-        //{
-        //    CardAction openTaskModueleExtextesion = new CardAction();
-        //    openTaskModueleExtextesion.Type = "openUrl";
-        //    openTaskModueleExtextesion.Value = "http://localhost:5130/initialaction"; // ToDo
-        //    return new MessagingExtensionActionResponse
-        //    {
-        //        ComposeExtension = new MessagingExtensionResult
-        //        {
-        //            Type = "config",                    
-        //            SuggestedActions = new()
-        //            {
-        //                Actions = new()
-        //                {
-        //                    openTaskModueleExtextesion
-        //                }
-        //            }
-                      
-        //    ]
-        //        }
-        //    };
-        //}
-        //else
-        //{
+        if (action.CommandId == "selectItem")
+        {
+            var actionData = ((JObject)action.Data).ToObject<Product>();
+            string prodId = actionData.Id ?? "";
+            string prodName = actionData.Id ?? "";
+            string prodOrders = actionData.Orders.ToString() ?? "";
+
+            return new MessagingExtensionActionResponse
+            {
+                ComposeExtension = new MessagingExtensionResult
+                {
+                    Type = "message",
+                    Text = prodId + " " + prodName + " " + prodOrders
+                }
+            };
+        }
+        else
+        {
             // The user has chosen to create a card by choosing the 'Create Card' context menu command.
             var actionData = ((JObject)action.Data).ToObject<CardResponse>();
             var templateJson = await System.IO.File.ReadAllTextAsync(_adaptiveCardFilePath, cancellationToken);
@@ -60,8 +56,8 @@ public class ActionApp : TeamsActivityHandler
                     Attachments = new[] { attachments }
                 }
             };
-        //}
-        
+        }
+
     }
 }
 
