@@ -5,11 +5,11 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "PRD0001"
+      "text": "${ID}"
     },
     {
       "type": "TextBlock",
-      "text": "Product 1",
+      "text": "${Name}",
       "wrap": true
     },
     {
@@ -19,6 +19,11 @@
           "type": "Column",
           "width": "auto",
           "items": [
+            {
+              "type": "TextBlock",
+              "text": "Ordered by now: ",
+              "wrap": true
+            },
             {
               "type": "TextBlock",
               "text": "To Order:",
@@ -31,8 +36,16 @@
           "width": "stretch",
           "items": [
             {
+              "type": "TextBlock",
+              "text": "${Orders}",
+              "weight": "Bolder",
+              "wrap": true
+            },
+            {
               "type": "Input.Number",
-              "placeholder": "Placeholder text"
+              "placeholder": "1",
+              "id": "order-id",
+              "label": "To order"
             }
           ]
         }

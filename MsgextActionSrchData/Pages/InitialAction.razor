@@ -7,10 +7,14 @@
 @page "/InitialAction"
 <script type="text/javascript">
     function submitTasks() {
-        var selectedId = document.getElementById('prodName').getAttribute('data-prodid');
-        var selectedName = document.getElementById('prodName').getAttribute('data-name');
-        var selectedOrders = document.getElementById('prodName').getAttribute('data-orders');
-        var selectedOrderable = document.getElementById('prodName').getAttribute('data-orderable');
+        var hiddenLabel = document.getElementById('prodName');
+        var selectedId = hiddenLabel.getAttribute('data-prodid');
+        var selectedName = hiddenLabel.getAttribute('data-name');
+        var selectedOrders = hiddenLabel.getAttribute('data-orders');
+        var selectedOrderable = false;
+        if (hiddenLabel.dataset.orderable !== undefined) {
+            selectedOrderable = true;
+        }
         var result = { Id: selectedId, Name: selectedName, Orders: selectedOrders, Orderable: selectedOrderable }
         alert(result.Id + " " + result.Name + " " + result.Orders + " " + result.Orderable);
         microsoftTeams.tasks.submitTask(result);
@@ -44,7 +48,13 @@
       </FluentRadioGroup>
 
       <p>
-          <label id="prodName" data-name="@SelectedItem?.Name" data-prodid="@SelectedItem?.Id" data-orders="@SelectedItem?.Orders" data-orderable="@SelectedItem.Orderable">@SelectedItem?.Name</label>
+                <label id="prodName"
+                       class="hiddenLabel"
+                        aria-hidden="true"
+                        data-name="@SelectedItem?.Name"
+                        data-prodid="@SelectedItem?.Id"
+                        data-orders="@SelectedItem?.Orders"
+                        data-orderable="@SelectedItem?.Orderable">@SelectedItem?.Name</label>
       </p>
           @* <FluentButton Appearance="Appearance.Accent" onclick="SbmData.submitTask()">Submit Task</FluentButton> *@
           <button onclick="submitTasks()">Submit Order</button>

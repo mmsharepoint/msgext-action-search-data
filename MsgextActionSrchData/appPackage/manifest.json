@@ -40,7 +40,7 @@
             "type": "action",
             "taskInfo": {
               "width": "640",
-              "height": "280",
+              "height": "320",
               "title": "Select item",
               "url": "${{BOT_ENDPOINT}}/initialaction"
             }
