@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components;
 
 @inject ProductController ProductsService
+@inject IJSRuntime JS
 
 @page "/InitialAction"
 <script type="text/javascript">
@@ -22,7 +23,7 @@
 </script>
 <div class="container">
   <div class="row">
-    <div class="px-4 col-10">
+    <div class="px-4 col-9">
       <FluentListbox TOption="Product"
                     Label="Select a product"
                     Items=@products
@@ -40,7 +41,7 @@
             </p>
 
     </div>
-    <div class="px-4 col-2">
+    <div class="px-4 col-3">
       <FluentRadioGroup Required="true" @bind-Value="DataSrc" Name="DataSrc" Orientation="Orientation.Horizontal">
           <FluentRadio Value="@("all")">All</FluentRadio>
           <FluentRadio Value="@("orderable")">Orderable</FluentRadio>
@@ -48,16 +49,16 @@
       </FluentRadioGroup>
 
       <p>
-                <label id="prodName"
-                       class="hiddenLabel"
-                        aria-hidden="true"
-                        data-name="@SelectedItem?.Name"
-                        data-prodid="@SelectedItem?.Id"
-                        data-orders="@SelectedItem?.Orders"
-                        data-orderable="@SelectedItem?.Orderable">@SelectedItem?.Name</label>
+          <label id="prodName"
+                  class="hiddenLabel"
+                  aria-hidden="true"
+                  data-name="@SelectedItem?.Name"
+                  data-prodid="@SelectedItem?.Id"
+                  data-orders="@SelectedItem?.Orders"
+                  data-orderable="@SelectedItem?.Orderable">@SelectedItem?.Name</label>
       </p>
-          @* <FluentButton Appearance="Appearance.Accent" onclick="SbmData.submitTask()">Submit Task</FluentButton> *@
-          <button onclick="submitTasks()">Submit Order</button>
+      <FluentButton Appearance="Appearance.Accent" @onclick="SubmitTeamsTask">Submit Task</FluentButton>
+          @* <button onclick="submitTasks()">Submit Order</button> *@
     </div>
   </div>
 </div>
@@ -74,10 +75,15 @@
     string? SelectedValue = string.Empty;
     string dataSource;
 
-    string prodID = " ";
-    string prodName = " ";
-    Int32 prodOrders = 17;
-    bool prodOrderable = true;
+    // string prodID = " ";
+    // string prodName = " ";
+    // Int32 prodOrders = 17;
+    // bool prodOrderable = true;
+
+    private async Task SubmitTeamsTask()
+    {
+        await JS.InvokeVoidAsync("submitTasks");
+    }
 
     [Parameter]public string DataSrc { get => dataSource; set
         {
@@ -104,15 +110,4 @@
         products = ProductsService.GetAllProducts();
         return base.OnInitializedAsync();
     }
-    // protected async Task SubmitTask()
-    // {
-    //     Product datObj = new Product {
-    //       Id = "if",
-    //       Name = "Name",
-    //       Orders = 12,
-    //       Orderable = false 
-    //     };
-    //     await js.InvokeVoidAsync("SbmData.submitTask()", datObj);
-    // }
-
 }

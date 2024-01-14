@@ -7,6 +7,15 @@ It retrieves a list of products to be further dealt with: Overview listed, order
 
 App result:
 
+|Task Module to select a product|
+:-------------------------:
+![Task Module to select a product](assets/TaskModuel1.png)
+
+|Order Card result|
+:-------------------------:
+![Order Card Result](assets/AdaptiveCardResult1.png)
+
+
 For further details see the author's [blog post](https://mmsharepoint.wordpress.com/)
 
 ## Frameworks

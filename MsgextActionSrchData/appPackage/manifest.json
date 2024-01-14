@@ -15,7 +15,7 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "MsgextActionSrchData${{APP_NAME_SUFFIX}}",
+        "short": "Product Mgmt ${{APP_NAME_SUFFIX}}",
         "full": "full name for MsgextActionSrchData"
     },
     "description": {
@@ -36,12 +36,12 @@
               "commandBox"
             ],
             "description": "Command to select item from a list",
-            "title": "Select Item",
+            "title": "Select Product",
             "type": "action",
             "taskInfo": {
-              "width": "640",
-              "height": "320",
-              "title": "Select item",
+              "width": "720",
+              "height": "480",
+              "title": "Select a Product",
               "url": "${{BOT_ENDPOINT}}/initialaction"
             }
           },
