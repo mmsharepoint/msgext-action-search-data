@@ -9,7 +9,7 @@ App result:
 
 |Task Module to select a product|
 :-------------------------:
-![Task Module to select a product](assets/TaskModuel1.png)
+![Task Module to select a product](assets/TaskModule1.png)
 
 |Order Card result|
 :-------------------------:
@@ -52,7 +52,13 @@ Version|Date|Author|Comments
 - Open bot-meeting-lifecycle-feedback-csharp.sln in Visual Studio 2022
 - Perform first actions in GettingStarted.txt (before hitting F5)
 - Now you should have prepared your app (will try local first)
-- In your Teams calendar have a "real" meeting prepared ("real" means with at least +1 real partcipant)
+- 
+- Create an Azure Data Table and put account name and insert AZURE_CONFIG_CONNECTION_STRING, AZURE_TABLE_ACCOUNTNAME and AZURE_TABLE_KEY to appsettings.json or better appsettings.Development.json 
+
+- |Azure Table with columns|
+:-------------------------:
+![Task Module to select a product](assets/TaskModule1.png)
+
 - When starting debug by F5 or "Microsoft Teams (browser)"
   - Âdd the app to that meeting (eventually search for it)
   - Join the meeting to start it
