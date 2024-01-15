@@ -35,10 +35,10 @@
                     @bind-Value="@SelectedValue"
                     @bind-SelectedOption="@SelectedItem" />
 
-            <p>
+            @* <p>
                 Selected value: @SelectedValue <br />
                 Selected item: @SelectedItem?.Name.ToString()
-            </p>
+            </p> *@
 
     </div>
     <div class="px-4 col-3">
@@ -55,23 +55,23 @@
                   data-name="@SelectedItem?.Name"
                   data-prodid="@SelectedItem?.Id"
                   data-orders="@SelectedItem?.Orders"
-                  data-orderable="@SelectedItem?.Orderable">@SelectedItem?.Name</label>
+                  data-orderable="@SelectedItem?.Orderable"></label>
       </p>
-      <FluentButton Appearance="Appearance.Accent" @onclick="SubmitTeamsTask">Submit Task</FluentButton>
+            <FluentButton Appearance="Appearance.Accent" Disabled="NoSelectedProduct()" @onclick="SubmitTeamsTask">Submit Order</FluentButton>
           @* <button onclick="submitTasks()">Submit Order</button> *@
     </div>
   </div>
 </div>
 
 @code {
-    Product? SelectedItem = new Product
-    {
-        Id = "",
-        Name = "",
-        Orders=  0,
-        Orderable= true
-    };
-    
+    Product? SelectedItem; // = new Product
+                           // {
+                           //     Id = "",
+                           //     Name = "",
+                           //     Orders=  0,
+                           //     Orderable= true
+                           // };
+
     string? SelectedValue = string.Empty;
     string dataSource;
 
@@ -84,7 +84,10 @@
     {
         await JS.InvokeVoidAsync("submitTasks");
     }
-
+    private bool NoSelectedProduct()
+    {
+        return SelectedItem == null;
+    }
     [Parameter]public string DataSrc { get => dataSource; set
         {
             dataSource = value;

@@ -13,7 +13,7 @@ App result:
 
 |Order Card result|
 :-------------------------:
-![Order Card Result](assets/AdaptiveCardResult1.png)
+![Order Card Result](assets/AdaptivecardResult1.png)
 
 
 For further details see the author's [blog post](https://mmsharepoint.wordpress.com/)
