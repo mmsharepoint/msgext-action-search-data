@@ -21,9 +21,9 @@
         microsoftTeams.tasks.submitTask(result);
     }
 </script>
-<div class="container">
-  <div class="row">
-    <div class="px-4 col-9">
+<div class="tmContainer tmContainer-md tmContainer-sm">
+  <div class="tmRow">
+    <div class="tmCol9">
       <FluentListbox TOption="Product"
                     Label="Select a product"
                     Items=@products
@@ -41,8 +41,8 @@
             </p> *@
 
     </div>
-    <div class="px-4 col-3">
-      <FluentRadioGroup Required="true" @bind-Value="DataSrc" Name="DataSrc" Orientation="Orientation.Horizontal">
+    <div class="tmCol3">
+      <FluentRadioGroup Required="true" @bind-Value="DataSrc" Name="DataSrc" Orientation="Orientation.Vertical">
           <FluentRadio Value="@("all")">All</FluentRadio>
           <FluentRadio Value="@("orderable")">Orderable</FluentRadio>
           <FluentRadio Value="@("nonorderable")">Non orderable</FluentRadio>
@@ -57,23 +57,15 @@
                   data-orders="@SelectedItem?.Orders"
                   data-orderable="@SelectedItem?.Orderable"></label>
       </p>
-            <FluentButton Appearance="Appearance.Accent" Disabled="NoSelectedProduct()" @onclick="SubmitTeamsTask">Submit Order</FluentButton>
-          @* <button onclick="submitTasks()">Submit Order</button> *@
+        <FluentButton Appearance="Appearance.Accent" Disabled="NoSelectedProduct()" @onclick="SubmitTeamsTask">Submit Order</FluentButton>
     </div>
   </div>
 </div>
 
 @code {
-    Product? SelectedItem; // = new Product
-                           // {
-                           //     Id = "",
-                           //     Name = "",
-                           //     Orders=  0,
-                           //     Orderable= true
-                           // };
-
+    Product? SelectedItem;
     string? SelectedValue = string.Empty;
-    string dataSource;
+    string dataSource = "all";
 
     // string prodID = " ";
     // string prodName = " ";
