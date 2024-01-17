@@ -54,10 +54,6 @@
   ],
   "actions": [
     {
-      "type": "Action.Execute",
-      "title": "Order"
-    },
-    {
       "type": "Action.OpenUrl",
       "title": "View orders",
       "url": "https://adaptivecards.io"

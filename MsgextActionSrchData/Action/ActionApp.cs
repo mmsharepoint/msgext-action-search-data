@@ -4,10 +4,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using AdaptiveCards;
 using Newtonsoft.Json.Linq;
-using Microsoft.Bot.Connector;
-using static System.Net.WebRequestMethods;
 using MsgextActionSrchData.Model;
-using System.Net.Mail;
 
 namespace MsgextActionSrchData.Action;
 
@@ -30,6 +27,16 @@ public class ActionApp : TeamsActivityHandler
             var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(templateJson);
             var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = prodOrders });
             var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
+            if (prodOrderable != "false")
+            {
+                adaptiveCard.Actions.Add(new AdaptiveExecuteAction()
+                {
+                    Title = "Order",
+                    Verb = "order",
+                     = "Action.Execute",
+                     Data = actionData
+                });
+            }
             var attachments = new MessagingExtensionAttachment()
             {
                 ContentType = AdaptiveCard.ContentType,
@@ -73,11 +80,23 @@ public class ActionApp : TeamsActivityHandler
         }
 
     }
-}
 
-internal class CardResponse
+    protected override async Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
+    {
+        string dataJson = invokeValue.Action.Data.ToString();
+        string verb = invokeValue.Action.Verb;
+        turnContext.SendActivityAsync("Response received");
+        return new AdaptiveCardInvokeResponse
+        {
+            StatusCode = 200
+        };
+        //return base.OnAdaptiveCardInvokeAsync(turnContext, invokeValue, cancellationToken);
+    }
+
+    internal class CardResponse
 {
     public string Title { get; set; }
     public string SubTitle { get; set; }
     public string Text { get; set; }
+}
 }

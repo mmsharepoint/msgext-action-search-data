@@ -16,18 +16,18 @@ App result:
 ![Order Card Result](assets/AdaptivecardResult1.png)
 
 
-For further details see the author's [blog post](https://mmsharepoint.wordpress.com/)
+For further details see the author's [blog post](https://mmsharepoint.wordpress.com/2024/)
 
 ## Frameworks
 
 
-![drop](https://img.shields.io/badge/.NET&nbsp;Core-8-green.svg)
+![drop](https://img.shields.io/badge/.NET&nbsp;Core-6-green.svg)
 
-![drop](https://img.shields.io/badge/Bot&nbsp;Framework-14.21-green.svg)
+![drop](https://img.shields.io/badge/Bot&nbsp;Framework-4.21-green.svg)
 
-![drop](https://img.shields.io/badge/Teams&nbsp;Toolkit&nbsp;for&nbsp;VS&nbsp;17.7-green.svg)
+![drop](https://img.shields.io/badge/Teams&nbsp;Toolkit&nbsp;for&nbsp;VS-17.7-green.svg)
 
-![drop](https://img.shields.io/badge/Visual&nbsp;Studio&nbsp;2022-17.8-green.svg)
+![drop](https://img.shields.io/badge/Visual&nbsp;Studio&nbsp;2022-17.9-green.svg)
 
 
 ## Prerequisites
@@ -55,9 +55,7 @@ Version|Date|Author|Comments
 - 
 - Create an Azure Data Table and put account name and insert AZURE_CONFIG_CONNECTION_STRING, AZURE_TABLE_ACCOUNTNAME and AZURE_TABLE_KEY to appsettings.json or better appsettings.Development.json 
 
-- |Azure Table with columns|
-:-------------------------:
-![Task Module to select a product](assets/TaskModule1.png)
+![Azure Table with columns](assets/AzureTable.png)
 
 - When starting debug by F5 or "Microsoft Teams (browser)"
   - Âdd the app to that meeting (eventually search for it)

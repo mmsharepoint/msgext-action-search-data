@@ -4,3 +4,5 @@
 
 /.vs
 /MsgextActionSrchData/Resources/helloWorldCard.json
+/MsgextActionSrchData/Pages/T.razor
+/MsgextActionSrchData/Components/Demo.razor

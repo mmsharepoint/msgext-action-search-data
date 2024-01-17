@@ -1,50 +1,57 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.16",
-    "version": "1.0.0",
-    "id": "${{TEAMS_APP_ID}}",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://www.example.com",
-        "privacyUrl": "https://www.example.com/termofuse",
-        "termsOfUseUrl": "https://www.example.com/privacy"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Product Mgmt ${{APP_NAME_SUFFIX}}",
-        "full": "full name for MsgextActionSrchData"
-    },
-    "description": {
-        "short": "Short description of MsgextActionSrchData",
-        "full": "Full description of MsgextActionSrchData"
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [],
-    "composeExtensions": [
-      {
-        "botId": "${{BOT_ID}}",
-        "commands": [
-          {
-            "id": "selectItem",
-            "context": [
-              "compose",
-              "message",
-              "commandBox"
-            ],
-            "description": "Command to select item from a list",
-            "title": "Select Product",
-            "type": "action",
-            "taskInfo": {
-              "width": "720",
-              "height": "360",
-              "title": "Select a Product",
-              "url": "${{BOT_ENDPOINT}}/initialaction"
-            }
-          },
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "${{TEAMS_APP_ID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+      "name": "Markus Moeller",
+      "websiteUrl": "https://www.example.com",
+      "privacyUrl": "https://www.example.com/termofuse",
+      "termsOfUseUrl": "https://www.example.com/privacy"
+  },
+  "icons": {
+      "color": "color.png",
+      "outline": "outline.png"
+  },
+  "name": {
+      "short": "Product Mgmt ${{APP_NAME_SUFFIX}}",
+      "full": "full name for MsgextActionSrchData"
+  },
+  "description": {
+    "short": "Product mgmt look up tool.",
+    "full": "Get real-time products to order them and show what was arlready ordered in the past"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "${{BOT_ID}}",
+      "scopes": [ "personal", "team", "groupchat" ],
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "${{BOT_ID}}",
+      "commands": [
+        {
+          "id": "selectItem",
+          "context": [
+            "compose",
+            "message",
+            "commandBox"
+          ],
+          "description": "Command to select product from a list",
+          "title": "Select Product",
+          "type": "action",
+          "taskInfo": {
+            "width": "720",
+            "height": "360",
+            "title": "Select a Product",
+            "url": "${{BOT_ENDPOINT}}/initialaction"
+          }
+        },
             {
               "id": "createCard",
               "context": [
@@ -86,6 +93,7 @@
         "messageTeamMembers"
     ],
   "validDomains": [
-    "${{BOT_DOMAIN}}"
+    "${{BOT_DOMAIN,,
+    "token.botframework.com"
   ]
 }
