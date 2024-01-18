@@ -17,7 +17,7 @@
             selectedOrderable = true;
         }
         var result = { Id: selectedId, Name: selectedName, Orders: selectedOrders, Orderable: selectedOrderable }
-        alert(result.Id + " " + result.Name + " " + result.Orders + " " + result.Orderable);
+        // alert(result.Id + " " + result.Name + " " + result.Orders + " " + result.Orderable);
         microsoftTeams.tasks.submitTask(result);
     }
 </script>
@@ -29,17 +29,19 @@
                     Items=@products
                     Id="products-listbox"
                     Height="250px"
-                    Width="98%"
-                    OptionValue="@(i => i.Id)"
-                    OptionText="@(i => i.Id + " " + i.Name)"
+                    Width="98%"                   
                     @bind-Value="@SelectedValue"
-                    @bind-SelectedOption="@SelectedItem" />
-
-            @* <p>
-                Selected value: @SelectedValue <br />
-                Selected item: @SelectedItem?.Name.ToString()
-            </p> *@
-
+                    @bind-SelectedOption="@SelectedItem">
+                <OptionTemplate>
+                    <div class="tmCol11">@context.Id @context.Name</div>
+                    <div class="tmCol1">
+                        @if (@context.Orderable)
+                        {
+                            <FluentIcon Icon="Icons.Regular.Size16.MailInboxCheckmark" Slot="end" />
+                        }
+                    </div>
+                </OptionTemplate>
+    </FluentListbox>
     </div>
     <div class="tmCol3">
       <FluentRadioGroup Required="true" @bind-Value="DataSrc" Name="DataSrc" Orientation="Orientation.Vertical">

@@ -29,12 +29,12 @@ public class ActionApp : TeamsActivityHandler
             var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
             if (prodOrderable != "false")
             {
-                adaptiveCard.Actions.Add(new AdaptiveExecuteAction()
+                adaptiveCard.Actions.Prepend(new AdaptiveExecuteAction()
                 {
                     Title = "Order",
                     Verb = "order",
-                     = "Action.Execute",
-                     Data = actionData
+                    Type = "Action.Execute",
+                    Data = actionData
                 });
             }
             var attachments = new MessagingExtensionAttachment()
@@ -85,12 +85,29 @@ public class ActionApp : TeamsActivityHandler
     {
         string dataJson = invokeValue.Action.Data.ToString();
         string verb = invokeValue.Action.Verb;
-        turnContext.SendActivityAsync("Response received");
-        return new AdaptiveCardInvokeResponse
+
+        string _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, "ProposedOrder.json");
+        var actionData = ((JObject)invokeValue.Action.Data).ToObject<Product>();
+        string prodId = actionData.Id ?? "";
+        string prodName = actionData.Name ?? "";
+        string prodOrders = actionData.Orders.ToString() ?? "";
+        string prodOrderable = actionData.Orderable.ToString() ?? "false";
+        var templateJson = await System.IO.File.ReadAllTextAsync(_adaptiveCardFilePath, cancellationToken);
+        var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(templateJson);
+        var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = prodOrders });
+        var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
+        var attachment = new Attachment
         {
+            ContentType = AdaptiveCard.ContentType,
+            Content = adaptiveCard
+        };
+        var messageActivity = MessageFactory.Attachment(attachment);
+        await turnContext.SendActivityAsync(messageActivity);
+
+        return new AdaptiveCardInvokeResponse
+        {            
             StatusCode = 200
         };
-        //return base.OnAdaptiveCardInvokeAsync(turnContext, invokeValue, cancellationToken);
     }
 
     internal class CardResponse

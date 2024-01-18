@@ -15,6 +15,10 @@ App result:
 :-------------------------:
 ![Order Card Result](assets/AdaptivecardResult1.png)
 
+|App in action|
+:-------------------------:
+![App in action](assets/01msgext-action-sear-action.gif)
+
 
 For further details see the author's [blog post](https://mmsharepoint.wordpress.com/2024/)
 
