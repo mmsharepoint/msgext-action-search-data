@@ -54,6 +54,17 @@
   ],
   "actions": [
     {
+      "type": "Action.Execute",
+      "title": "Order",
+      "verb": "order",
+      "data":
+      {
+        "ID": "${prodId}",
+        "Name": "${prodName}",
+        "Orders": "${prodOrders}"
+      }
+    },
+    {
       "type": "Action.OpenUrl",
       "title": "View orders",
       "url": "https://adaptivecards.io"

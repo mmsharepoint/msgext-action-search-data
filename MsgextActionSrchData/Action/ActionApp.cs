@@ -27,16 +27,16 @@ public class ActionApp : TeamsActivityHandler
             var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(templateJson);
             var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = prodOrders });
             var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
-            if (prodOrderable != "false")
-            {
-                adaptiveCard.Actions.Prepend(new AdaptiveExecuteAction()
-                {
-                    Title = "Order",
-                    Verb = "order",
-                    Type = "Action.Execute",
-                    Data = actionData
-                });
-            }
+            //if (prodOrderable != "false")
+            //{
+            //    adaptiveCard.Actions.Prepend(new AdaptiveExecuteAction()
+            //    {
+            //        Title = "Order",
+            //        Verb = "order",
+            //        Type = "Action.Execute",
+            //        Data = actionData
+            //    });
+            //}
             var attachments = new MessagingExtensionAttachment()
             {
                 ContentType = AdaptiveCard.ContentType,
