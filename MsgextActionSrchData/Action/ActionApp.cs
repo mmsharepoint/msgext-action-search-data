@@ -5,13 +5,66 @@ using Microsoft.Bot.Schema.Teams;
 using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using MsgextActionSrchData.Model;
+using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace MsgextActionSrchData.Action;
 
 public class ActionApp : TeamsActivityHandler
 {
     private readonly string _adaptiveBaseCardFilePath = Path.Combine(".", "Resources");
-    // Action.
+    protected string _hosturl;
+    public ActionApp(IConfiguration config)
+    {
+        _hosturl = config["BotEndpoint"];
+    }
+
+    protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+    {      
+    //if the bot is installed it will create adaptive card attachment and show card with input fields
+        try
+        {
+            string taskModuleUrl = $"{_hosturl}initialaction";
+            //await TeamsInfo.GetPagedMembersAsync(turnContext, 100, null, cancellationToken);
+            return new MessagingExtensionActionResponse
+            {
+                Task = new TaskModuleContinueResponse
+                {
+                    Type = "continue",
+                    Value = new TaskModuleTaskInfo
+                    {
+                        Width = 720,
+                        Height = 360,
+                        Title = "Select a Product",
+                        Url = taskModuleUrl
+                    }
+                }
+            };
+    }
+        catch (Exception ex)
+        {
+            if (ex.Message.Contains("403"))
+            {
+                // else it will show installation card in Task module for the Bot so user can install the app
+                //return new MessagingExtensionActionResponse
+                //        {
+                //            Task = new TaskModuleContinueResponse
+                //            {
+                //                Value = new TaskModuleTaskInfo
+                //                {
+                //                    Card = GetJustInTimeInstallationCard(),
+                //                    Height = 200,
+                //                    Width = 400,
+                //                    Title = "Adaptive Card: Inputs",
+                //                }
+                //            },
+                //        };
+
+            }
+            return null;
+            }
+    }
+
     protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
     {
         if (action.CommandId == "selectItem")

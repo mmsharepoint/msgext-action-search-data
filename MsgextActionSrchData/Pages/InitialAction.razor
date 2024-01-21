@@ -19,8 +19,8 @@
         var result = { Id: selectedId, Name: selectedName, Orders: selectedOrders, Orderable: selectedOrderable }
         // alert(result.Id + " " + result.Name + " " + result.Orders + " " + result.Orderable);
         debugger;
-        microsoftTeams.tasks.submitTask(result);
-        // microsoftTeams.dialog.submit(result);
+        // microsoftTeams.tasks.submitTask(result);
+        microsoftTeams.dialog.url.submit(result);
     }
 </script>
 <div class="tmContainer tmContainer-md tmContainer-sm">

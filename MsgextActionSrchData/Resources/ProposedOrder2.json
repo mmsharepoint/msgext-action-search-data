@@ -128,9 +128,9 @@
       "title": "Order",
       "verb": "order",
       "data": {
-        "ID": "${prodId}",
-        "Name": "${prodName}",
-        "Orders": "${prodOrders}"
+        "ID": "${ID}",
+        "Name": "${Name}",
+        "Orders": "${Orders}"
       }
     },
     {

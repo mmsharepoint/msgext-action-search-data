@@ -45,12 +45,7 @@
           "description": "Command to select product from a list",
           "title": "Select Product",
           "type": "action",
-          "taskInfo": {
-            "width": "720",
-            "height": "360",
-            "title": "Select a Product",
-            "url": "${{BOT_ENDPOINT}}/initialaction"
-          }
+          "fetchTask": true
         },
             {
               "id": "createCard",

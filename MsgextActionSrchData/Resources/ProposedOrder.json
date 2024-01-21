@@ -18,15 +18,32 @@
         {
           "type": "Column",
           "width": "auto",
+          "items": [            
+            {
+              "type": "TextBlock",
+              "text": "To Order:",
+              "wrap": true
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [            
+            {
+              "type": "Input.Number",
+              "placeholder": "1",
+              "id": "order-id"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
           "items": [
             {
               "type": "TextBlock",
               "text": "Ordered by now: ",
-              "wrap": true
-            },
-            {
-              "type": "TextBlock",
-              "text": "To Order:",
               "wrap": true
             }
           ]
@@ -40,12 +57,6 @@
               "text": "${Orders}",
               "weight": "Bolder",
               "wrap": true
-            },
-            {
-              "type": "Input.Number",
-              "placeholder": "1",
-              "id": "order-id",
-              "label": "To order"
             }
           ]
         }
@@ -57,11 +68,10 @@
       "type": "Action.Execute",
       "title": "Order",
       "verb": "order",
-      "data":
-      {
-        "ID": "${prodId}",
-        "Name": "${prodName}",
-        "Orders": "${prodOrders}"
+      "data": {
+        "ID": "${ID}",
+        "Name": "${Name}",
+        "Orders": "${Orders}"
       }
     },
     {
