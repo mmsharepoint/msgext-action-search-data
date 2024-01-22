@@ -61,7 +61,7 @@
             {
               "type": "Input.Number",
               "placeholder": "1",
-              "id": "order-id1",
+              "id": "orderId1",
               "label": "Mo",
               "value": 1
             }

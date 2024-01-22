@@ -17,29 +17,6 @@
       "columns": [
         {
           "type": "Column",
-          "width": "auto",
-          "items": [            
-            {
-              "type": "TextBlock",
-              "text": "To Order:",
-              "wrap": true
-            }
-          ]
-        },
-        {
-          "type": "Column",
-          "width": "stretch",
-          "items": [
-            {
-              "type": "Input.Number",
-              "placeholder": "1",
-              "id": "orderId"
-            }
-          ]
-        },
-        {
-          "type": "Column",
-          "width": "stretch",
           "items": [
             {
               "type": "TextBlock",
@@ -64,16 +41,6 @@
     }
   ],
   "actions": [
-    {
-      "type": "Action.Execute",
-      "title": "Order",
-      "verb": "order",
-      "data": {
-        "ID": "${ID}",
-        "Name": "${Name}",
-        "Orders": "${Orders}"
-      }
-    },
     {
       "type": "Action.OpenUrl",
       "title": "View orders",

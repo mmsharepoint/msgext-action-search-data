@@ -2,6 +2,7 @@
 using Azure.Data.Tables;
 using Azure.Data.Tables.Models;
 using MsgextActionSrchData.Model;
+using System.Collections.Concurrent;
 
 namespace MsgextActionSrchData.Controllers
 {
@@ -65,6 +66,24 @@ namespace MsgextActionSrchData.Controllers
                 products.Add(p);
             }
             return products;
+        }
+
+        public Product UpdateProductOrders(ProductUpdate product)
+        {
+            TableEntity pEntity = tableClient.GetEntity<TableEntity>(product.Id, product.Name);
+            pEntity["Orders"] = product.Orders;
+
+            // Since no UpdateMode was passed, the request will default to Merge.
+            tableClient.UpdateEntityAsync(pEntity, pEntity.ETag);
+
+            TableEntity updatedEntity = tableClient.GetEntity<TableEntity>(product.Id, product.Name);
+            return new Product()
+            {
+                Id = updatedEntity.PartitionKey,
+                Name = updatedEntity.RowKey,
+                Orders = (int)updatedEntity.GetInt32("Orders"),
+                Orderable = (bool)updatedEntity.GetBoolean("Orderable")
+            };
         }
         public List<Product> GetAllMockProducts()
         {

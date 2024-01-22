@@ -7,16 +7,18 @@ using Newtonsoft.Json.Linq;
 using MsgextActionSrchData.Model;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using MsgextActionSrchData.Controllers;
 
 namespace MsgextActionSrchData.Action;
 
 public class ActionApp : TeamsActivityHandler
 {
     private readonly string _adaptiveBaseCardFilePath = Path.Combine(".", "Resources");
-    protected string _hosturl;
+    protected IConfiguration _config;
     public ActionApp(IConfiguration config)
     {
-        _hosturl = config["BotEndpoint"];
+        _config = config;
     }
 
     protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
@@ -24,7 +26,7 @@ public class ActionApp : TeamsActivityHandler
     //if the bot is installed it will create adaptive card attachment and show card with input fields
         try
         {
-            string taskModuleUrl = $"{_hosturl}initialaction";
+            string taskModuleUrl = $"{_config["BotEndpoint"]}initialaction";
             //await TeamsInfo.GetPagedMembersAsync(turnContext, 100, null, cancellationToken);
             return new MessagingExtensionActionResponse
             {
@@ -138,16 +140,21 @@ public class ActionApp : TeamsActivityHandler
     {
         string dataJson = invokeValue.Action.Data.ToString();
         string verb = invokeValue.Action.Verb;
-
-        string _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, "ProposedOrder.json");
-        var actionData = ((JObject)invokeValue.Action.Data).ToObject<Product>();
+        
+        string _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, "DisplayProductOrder.json");
+        var actionData = ((JObject)invokeValue.Action.Data).ToObject<ProductUpdate>();
         string prodId = actionData.Id ?? "";
         string prodName = actionData.Name ?? "";
         string prodOrders = actionData.Orders.ToString() ?? "";
         string prodOrderable = actionData.Orderable.ToString() ?? "false";
+
+        // Update Orders
+        ProductController productCtrl = new ProductController(_config);
+        Product resultProduct = productCtrl.UpdateProductOrders(actionData);
+
         var templateJson = await System.IO.File.ReadAllTextAsync(_adaptiveCardFilePath, cancellationToken);
         var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(templateJson);
-        var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = prodOrders });
+        var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = resultProduct.ToString() });
         var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
         var attachment = new Attachment
         {
