@@ -15,6 +15,8 @@ namespace MsgextActionSrchData.Action;
 public class ActionApp : TeamsActivityHandler
 {
     private readonly string _adaptiveBaseCardFilePath = Path.Combine(".", "Resources");
+    private readonly string _orderJSonFilename = "ProposedOrder.json";
+    private readonly string _displayJSonFilename = "DisplayProductOrder.json";
     protected IConfiguration _config;
     public ActionApp(IConfiguration config)
     {
@@ -70,28 +72,26 @@ public class ActionApp : TeamsActivityHandler
     protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
     {
         if (action.CommandId == "selectItem")
-        {
-            string _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, "ProposedOrder.json");
+        {                       
             var actionData = ((JObject)action.Data).ToObject<Product>();
             string prodId = actionData.Id ?? "";
             string prodName = actionData.Name ?? "";
             string prodOrders = actionData.Orders.ToString() ?? "";
             string prodOrderable = actionData.Orderable.ToString() ?? "false";
-
+            string _adaptiveCardFilePath = String.Empty;
+            if (prodOrderable != "false")  
+            {
+                _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, _orderJSonFilename);
+            }
+            else
+            {
+                _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, _displayJSonFilename);
+            }
             var templateJson = await System.IO.File.ReadAllTextAsync(_adaptiveCardFilePath, cancellationToken);
             var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(templateJson);
             var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = prodOrders });
             var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
-            //if (prodOrderable != "false")
-            //{
-            //    adaptiveCard.Actions.Prepend(new AdaptiveExecuteAction()
-            //    {
-            //        Title = "Order",
-            //        Verb = "order",
-            //        Type = "Action.Execute",
-            //        Data = actionData
-            //    });
-            //}
+            
             var attachments = new MessagingExtensionAttachment()
             {
                 ContentType = AdaptiveCard.ContentType,
@@ -141,7 +141,7 @@ public class ActionApp : TeamsActivityHandler
         string dataJson = invokeValue.Action.Data.ToString();
         string verb = invokeValue.Action.Verb;
         
-        string _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, "DisplayProductOrder.json");
+        string _adaptiveCardFilePath = Path.Combine(_adaptiveBaseCardFilePath, _displayJSonFilename);
         var actionData = ((JObject)invokeValue.Action.Data).ToObject<ProductUpdate>();
         string prodId = actionData.Id ?? "";
         string prodName = actionData.Name ?? "";
@@ -154,7 +154,7 @@ public class ActionApp : TeamsActivityHandler
 
         var templateJson = await System.IO.File.ReadAllTextAsync(_adaptiveCardFilePath, cancellationToken);
         var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(templateJson);
-        var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = resultProduct.ToString() });
+        var adaptiveCardJson = template.Expand(new { ID = prodId, Name = prodName, Orders = resultProduct.Orders.ToString() });
         var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson).Card;
         var attachment = new Attachment
         {

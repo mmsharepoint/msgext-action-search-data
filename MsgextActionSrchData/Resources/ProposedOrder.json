@@ -68,6 +68,7 @@
       "type": "Action.Execute",
       "title": "Order",
       "verb": "order",
+      "associatedInputs": "Auto",
       "data": {
         "ID": "${ID}",
         "Name": "${Name}",

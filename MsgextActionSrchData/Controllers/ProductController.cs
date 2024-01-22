@@ -71,7 +71,8 @@ namespace MsgextActionSrchData.Controllers
         public Product UpdateProductOrders(ProductUpdate product)
         {
             TableEntity pEntity = tableClient.GetEntity<TableEntity>(product.Id, product.Name);
-            pEntity["Orders"] = product.Orders;
+            int newOrders = product.Orders + product.orderId;
+            pEntity["Orders"] = newOrders;
 
             // Since no UpdateMode was passed, the request will default to Merge.
             tableClient.UpdateEntityAsync(pEntity, pEntity.ETag);
