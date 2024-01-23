@@ -1,8 +1,6 @@
 ﻿using Azure;
 using Azure.Data.Tables;
-using Azure.Data.Tables.Models;
 using MsgextActionSrchData.Model;
-using System.Collections.Concurrent;
 
 namespace MsgextActionSrchData.Controllers
 {

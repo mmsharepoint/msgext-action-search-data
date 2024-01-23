@@ -17,9 +17,6 @@
             selectedOrderable = true;
         }
         var result = { Id: selectedId, Name: selectedName, Orders: selectedOrders, Orderable: selectedOrderable }
-        // alert(result.Id + " " + result.Name + " " + result.Orders + " " + result.Orderable);
-        debugger;
-        // microsoftTeams.tasks.submitTask(result);
         microsoftTeams.dialog.url.submit(result);
     }
 </script>
@@ -39,7 +36,7 @@
                     <div class="tmCol1">
                         @if (@context.Orderable)
                         {
-                            <FluentIcon Icon="Icons.Regular.Size16.MailInboxCheckmark" Slot="end" />
+                            <FluentIcon Icon="Icons.Regular.Size16.MailInboxCheckmark" Title="Orderable" Slot="end" />
                         }
                     </div>
                 </OptionTemplate>
