@@ -61,7 +61,7 @@
             {
               "type": "Input.Number",
               "placeholder": "1",
-              "id": "orderId1",
+              "id": "orderId",
               "label": "Mo",
               "value": 1
             }
@@ -74,7 +74,7 @@
             {
               "type": "Input.Number",
               "placeholder": "1",
-              "id": "order-id2",
+              "id": "orderId2",
               "value": 1,
               "label": "Tu"
             }
@@ -87,7 +87,7 @@
             {
               "type": "Input.Number",
               "placeholder": "1",
-              "id": "order-id3",
+              "id": "orderId3",
               "value": 1,
               "label": "We"
             }
@@ -100,7 +100,7 @@
             {
               "type": "Input.Number",
               "placeholder": "1",
-              "id": "order-id4",
+              "id": "orderId4",
               "value": 1,
               "label": "Th"
             }
@@ -113,7 +113,7 @@
             {
               "type": "Input.Number",
               "placeholder": "Placeholder text",
-              "id": "order-id5",
+              "id": "orderId5",
               "value": 1,
               "label": "Fr"
             }
