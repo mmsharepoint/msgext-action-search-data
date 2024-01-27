@@ -69,7 +69,10 @@ namespace MsgextActionSrchData.Controllers
         public Product UpdateProductOrders(ProductUpdate product)
         {
             TableEntity pEntity = tableClient.GetEntity<TableEntity>(product.Id, product.Name);
-            int newOrders = product.Orders + product.orderId;
+
+            // No´matter if single or weekday order: Sum it up
+            int newOrders = product.Orders + product.orderId + product.orderId2 + product.orderId3 + product.orderId4;
+
             pEntity["Orders"] = newOrders;
 
             // Since no UpdateMode was passed, the request will default to Merge.

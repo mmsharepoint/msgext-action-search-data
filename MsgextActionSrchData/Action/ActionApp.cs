@@ -12,7 +12,7 @@ namespace MsgextActionSrchData.Action;
 public class ActionApp : TeamsActivityHandler
 {
     private readonly string _adaptiveBaseCardFilePath = Path.Combine(".", "Resources");
-    private readonly string _orderJSonFilename = "ProposedOrder.json";
+    private readonly string _orderJSonFilename = "ProposedOrder2.json";
     private readonly string _displayJSonFilename = "DisplayProductOrder.json";
     protected IConfiguration _config;
     public ActionApp(IConfiguration config)
