@@ -15,6 +15,10 @@ App result:
 :-------------------------:
 ![Order Card Result](assets/AdaptivecardResult1.png)
 
+|Order Card result in Oùtlook with weekday order option|
+:-------------------------:
+![Order Card Result in Oùtlook with weekday order option](assets/AdaptivecardResult4.png)
+
 |App in action|
 :-------------------------:
 ![App in action](assets/01msgext-action-sear-action.gif)
@@ -42,7 +46,7 @@ For further details see the author's [blog post](https://mmsharepoint.wordpress.
 
 Version|Date|Author|Comments
 -------|----|--------|--------
-1.0|January xx, 2024|[Markus Moeller](http://www.twitter.com/moeller2_0)|Initial release
+1.0|January 31, 2024|[Markus Moeller](http://www.twitter.com/moeller2_0)|Initial release
 
 ## Disclaimer
 
@@ -62,9 +66,7 @@ Version|Date|Author|Comments
 ![Azure Table with columns](assets/AzureTable.png)
 
 - When starting debug by F5 or "Microsoft Teams (browser)"
-  - Âdd the app to that meeting (eventually search for it)
-  - Join the meeting to start it
-  - Leave and end the meeting
+  
 
 
 

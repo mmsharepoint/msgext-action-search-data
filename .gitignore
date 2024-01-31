@@ -6,3 +6,5 @@
 /MsgextActionSrchData/Resources/helloWorldCard.json
 /MsgextActionSrchData/Pages/T.razor
 /MsgextActionSrchData/Components/Demo.razor
+/MsgextActionSrchData/infra/botRegistration/azurebot.bicep
+/MsgextActionSrchData/env/.env.dev
