@@ -35,3 +35,13 @@ resource botServiceMsTeamsChannel 'Microsoft.BotService/botServices/channels@202
     channelName: 'MsTeamsChannel'
   }
 }
+
+// Connect the bot service to Microsoft 365 (Outlook)
+resource botServiceM365Extensions 'Microsoft.BotService/botServices/channels@2021-03-01' = {
+  parent: botService
+  location: 'global'
+  name: 'M365Extensions'
+  properties: {
+    channelName: 'MsTeamsChannel'
+  }
+}

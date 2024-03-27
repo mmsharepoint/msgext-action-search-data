@@ -1,5 +1,5 @@
 ﻿# msgext action search data - Microsoft 365 App
-Teams/M365 messaging extension app handling (action-based) data retrieval and handling
+Teams/M365 messaging extension app handling (action-based) data retrieval and writing back
 
 ## Summary
 This sample is a Teams and M365 Messaging Extension app created using the Teams Toolkit with Visual Studio 2022. It is also intended to be used in Copilot.
@@ -24,7 +24,7 @@ App result:
 ![App in action](assets/01msgext-action-sear-action.gif)
 
 
-For further details see the author's [blog post](https://mmsharepoint.wordpress.com/2024/)
+For further details see the author's [blog post](https://mmsharepoint.wordpress.com/2024/01/31/an-action-based-teams-and-m365-messaging-extension/)
 
 ## Frameworks
 
@@ -56,8 +56,8 @@ Version|Date|Author|Comments
 ## Minimal Path to Awesome
 - Clone the repository
     ```bash
-    git clone https://github.com/mmsharepoint/bot-meeting-lifecycle-feedback-csharp.git
-- Open bot-meeting-lifecycle-feedback-csharp.sln in Visual Studio 2022
+    git clone https://github.com/mmsharepoint/msgext-action-search-data.git
+- Open msgext-action-search-data.sln in Visual Studio 2022
 - Perform first actions in GettingStarted.txt (before hitting F5)
 - Now you should have prepared your app (will try local first)
 - 

@@ -5,22 +5,22 @@
   "id": "${{TEAMS_APP_ID}}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
-      "name": "Markus Moeller",
-      "websiteUrl": "https://www.example.com",
-      "privacyUrl": "https://www.example.com/termofuse",
-      "termsOfUseUrl": "https://www.example.com/privacy"
+    "name": "Markus Moeller",
+    "websiteUrl": "https://mmsharepoint.wordpress.com",
+    "privacyUrl": "https://www.example.com/termofuse",
+    "termsOfUseUrl": "https://www.example.com/privacy"
   },
   "icons": {
       "color": "color.png",
       "outline": "outline.png"
   },
   "name": {
-      "short": "Product Mgmt ${{APP_NAME_SUFFIX}}",
-      "full": "full name for MsgextActionSrchData"
+    "short": "Product Mgmt ${{APP_NAME_SUFFIX}}",
+    "full": "Product Mananagemt Solution"
   },
   "description": {
     "short": "Product mgmt look up tool.",
-    "full": "Get real-time products to order them and show what was arlready ordered in the past"
+    "full": "Get real-time products to order them and show what was arlready ordered in the past. Find and order all manageable products.  Find and order orderable manageable productucts. Find and order all non-orderable productucts."
   },
   "accentColor": "#FFFFFF",
   "bots": [
